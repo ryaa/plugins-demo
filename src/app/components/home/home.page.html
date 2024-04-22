@@ -1,0 +1,21 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Demo
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-card>
+    <ion-card-header>
+      Native Plugins Tests
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button expand="block" color="primary" (click)="openFile('android')">Open File (Android)</ion-button>
+      <ion-button expand="block" color="secondary" (click)="openFile('ios')">Open File (iOS)</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

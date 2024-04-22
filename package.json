@@ -9,7 +9,12 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "build:dev:android:sync": "npm run clear:cache && ionic build --configuration development && cap sync --inline android",
+    "build:dev:android:sync:open": "npm run build:dev:android:sync && cap open android",
+    "build:dev:ios:sync": "npm run clear:cache && ionic build --configuration development && cap sync --inline ios",
+    "build:dev:ios:sync:open": "npm run build:dev:ios:sync && cap open ios",
+    "clear:cache": "rm -rf .angular/cache"
   },
   "private": true,
   "dependencies": {
@@ -21,13 +26,18 @@
     "@angular/platform-browser": "^17.0.2",
     "@angular/platform-browser-dynamic": "^17.0.2",
     "@angular/router": "^17.0.2",
+    "@capacitor-community/file-opener": "file:../../../moh4sa/cap-file-opener/master",
+    "@capacitor/android": "6.0.0",
     "@capacitor/app": "6.0.0",
     "@capacitor/core": "6.0.0",
     "@capacitor/haptics": "6.0.0",
+    "@capacitor/ios": "6.0.0",
     "@capacitor/keyboard": "6.0.0",
     "@capacitor/status-bar": "6.0.0",
     "@ionic/angular": "^8.0.0",
+    "install": "^0.13.0",
     "ionicons": "^7.0.0",
+    "npm": "^10.5.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
@@ -60,5 +70,5 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.2.2"
   },
-  "description": "An Ionic project"
+  "description": "This is a demo application for @capacitor-community/file-opener and @capacitor-community/volume-buttons plugins"
 }
