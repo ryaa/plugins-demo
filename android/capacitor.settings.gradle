@@ -3,10 +3,10 @@ include ':capacitor-android'
 project(':capacitor-android').projectDir = new File('../node_modules/@capacitor/android/capacitor')
 
 include ':capacitor-community-file-opener'
-project(':capacitor-community-file-opener').projectDir = new File('../../../../moh4sa/cap-file-opener/master/android')
+project(':capacitor-community-file-opener').projectDir = new File('../node_modules/@capacitor-community/file-opener/android')
 
 include ':capacitor-community-volume-buttons'
-project(':capacitor-community-volume-buttons').projectDir = new File('../../../../CAPACITOR-COMMUNITY/VOLUME-BUTTONS/chore-8-enable-capacitor-v6-0-0-support/android')
+project(':capacitor-community-volume-buttons').projectDir = new File('../node_modules/@capacitor-community/volume-buttons/android')
 
 include ':capacitor-app'
 project(':capacitor-app').projectDir = new File('../node_modules/@capacitor/app/android')
