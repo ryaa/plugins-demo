@@ -15,6 +15,11 @@
     <ion-card-content>
       <ion-button expand="block" color="primary" (click)="openFile('android')">Open File (Android)</ion-button>
       <ion-button expand="block" color="secondary" (click)="openFile('ios')">Open File (iOS)</ion-button>
+      <ion-button expand="block" color="primary" (click)="watchVolumeButtonsPressed()">Watch Volume Buttons</ion-button>
+      <ion-button expand="block" color="secondary" (click)="unwatchVolumeButtonsPressed()">UnWatch Volume
+        Buttons</ion-button>
+      <ion-button expand="block" color="secondary" (click)="isVolumeButtonsWatched()">Is Volume Buttons
+        Watched?</ion-button>
     </ion-card-content>
   </ion-card>
 

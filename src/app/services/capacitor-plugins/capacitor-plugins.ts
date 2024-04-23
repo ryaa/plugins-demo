@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 // NATIVE
 import { App, AppPlugin } from '@capacitor/app';
-// import { Device, DevicePlugin } from '@capacitor/device';
+import { Device, DevicePlugin } from '@capacitor/device';
 // import { Camera, CameraPlugin } from '@capacitor/camera';
 // import { CameraPreview, CameraPreviewPlugin } from '@capacitor-community/camera-preview';
 import { FileOpener, FileOpenerPlugin } from '@capacitor-community/file-opener';
@@ -14,7 +14,7 @@ import { FileOpener, FileOpenerPlugin } from '@capacitor-community/file-opener';
 // import { StatusBar, StatusBarPlugin } from '@capacitor/status-bar';
 // import { SplashScreen, SplashScreenPlugin } from '@capacitor/splash-screen';
 // import { TextZoom, TextZoomPlugin } from '@capacitor/text-zoom';
-// import { VolumeButtons, VolumeButtonsPlugin } from '@capacitor-community/volume-buttons';
+import { VolumeButtons, VolumeButtonsPlugin } from '@capacitor-community/volume-buttons';
 
 @Injectable({
     providedIn: 'root'
@@ -35,9 +35,9 @@ export class CapacitorPlugins {
     //     return CameraPreview;
     // }
 
-    // public getDevicePlugin(): DevicePlugin {
-    //     return Device;
-    // }
+    public getDevicePlugin(): DevicePlugin {
+        return Device;
+    }
 
     public getFileOpenerPlugin(): FileOpenerPlugin {
         return FileOpener;
@@ -75,9 +75,9 @@ export class CapacitorPlugins {
     //     return TextZoom;
     // }
 
-    // public getVolumeButtonsPlugin(): VolumeButtonsPlugin {
-    //     return VolumeButtons;
-    // }
+    public getVolumeButtonsPlugin(): VolumeButtonsPlugin {
+        return VolumeButtons;
+    }
 
 }
 

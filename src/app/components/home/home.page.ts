@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { throttleTime } from 'rxjs/operators';
+import * as moment from 'moment';
 
 // MODELS
 import { FILE_OPENER_PLUGIN_ERRORS } from '@models/base';
@@ -8,6 +11,7 @@ import { FileOpenerOptions } from '@capacitor-community/file-opener';
 import { CapacitorPlugins } from '@services/capacitor-plugins/capacitor-plugins';
 import { CommonUtils } from '@services/utils/common-utils';
 import { Dialogs } from '@services/dialogs/dialogs';
+import { VolumeButtonsUtils } from '@services/utils/volume-buttons-utils';
 
 @Component({
   selector: 'app-home',
@@ -16,10 +20,13 @@ import { Dialogs } from '@services/dialogs/dialogs';
 })
 export class HomePage {
 
+  private volumeUpButtonsEventsSub: Subscription | null = null;
+
   constructor(
     private capacitorPlugins: CapacitorPlugins,
     private commonUtils: CommonUtils,
-    private dialogs: Dialogs
+    private dialogs: Dialogs,
+    private volumeButtonsUtils: VolumeButtonsUtils
   ) { }
 
   public async openFile(
@@ -60,4 +67,49 @@ export class HomePage {
     }
 
   }
+
+  public async watchVolumeButtonsPressed(): Promise<void> {
+    this.volumeUpButtonsEventsSub = this.volumeButtonsUtils.volumeUpButtonEvents
+      .pipe(
+        throttleTime(500)
+      )
+      .subscribe(() => {
+        const currentTimeFormatted = moment().format('DD MMM YYYY, HH:mm:ss.SSS')
+        this.dialogs.showSuccessDialog(`TAKE PHOTO: ${currentTimeFormatted}`);
+      });
+
+    try {
+      await this.volumeButtonsUtils.watchVolumeUpButton();
+    } catch (error) {
+      console.error('[SamplePage] watchVolumeButtonsPressed - failed to set up volume buttons watch', error);
+      this.dialogs.showErrorDialog('failed to set up volume buttons watch: ' + this.commonUtils.safeStringify(error));
+    }
+  }
+  public async unwatchVolumeButtonsPressed(): Promise<void> {
+
+    try {
+      await this.volumeButtonsUtils.clearWatch();
+    } catch (error) {
+      console.error('[SamplePage] unwatchVolumeButtonsPressed - failed to clear watch for the volume buttons', error);
+      this.dialogs.showErrorDialog('failed to clear watch for the volume buttons: ' + this.commonUtils.safeStringify(error));
+    }
+
+    if (this.volumeUpButtonsEventsSub?.closed === false) {
+      this.volumeUpButtonsEventsSub.unsubscribe();
+      this.volumeUpButtonsEventsSub = null;
+    }
+
+  }
+  public async isVolumeButtonsWatched(): Promise<void> {
+
+    try {
+      const isVolumeUpButtonsWatched = await this.volumeButtonsUtils.isVolumeUpButtonsWatched();
+      this.dialogs.showInfoDialog(`isVolumeUpButtonsWatched: ${isVolumeUpButtonsWatched}`);
+    } catch (error) {
+      console.error('[SamplePage] isVolumeButtonsWatched - failed to check if the hardware volume buttons are watched', error);
+      this.dialogs.showErrorDialog('failed to check if the hardware volume buttons are watched: ' + this.commonUtils.safeStringify(error));
+    }
+
+  }
+
 }

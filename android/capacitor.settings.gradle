@@ -5,8 +5,14 @@ project(':capacitor-android').projectDir = new File('../node_modules/@capacitor/
 include ':capacitor-community-file-opener'
 project(':capacitor-community-file-opener').projectDir = new File('../../../../moh4sa/cap-file-opener/master/android')
 
+include ':capacitor-community-volume-buttons'
+project(':capacitor-community-volume-buttons').projectDir = new File('../../../../CAPACITOR-COMMUNITY/VOLUME-BUTTONS/chore-8-enable-capacitor-v6-0-0-support/android')
+
 include ':capacitor-app'
 project(':capacitor-app').projectDir = new File('../node_modules/@capacitor/app/android')
+
+include ':capacitor-device'
+project(':capacitor-device').projectDir = new File('../node_modules/@capacitor/device/android')
 
 include ':capacitor-haptics'
 project(':capacitor-haptics').projectDir = new File('../node_modules/@capacitor/haptics/android')
